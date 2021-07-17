@@ -1,11 +1,16 @@
 # based on https://github.com/just-containers/base-alpine/blob/master/Dockerfile
 
-# use latest alpine
-ARG IMAGE=alpine:latest
-FROM ${IMAGE}
-ARG ARCH=amd64
+FROM alpine:latest
+
+# TARGETARCH will be amd64 or arm64
+ARG TARGETARCH
 
 RUN \
+  # dynamic S6ARCH based on https://github.com/BretFisher/multi-platform-docker-build
+  case ${TARGETARCH} in \
+    "amd64") S6ARCH="amd64";; \
+    "arm64") S6ARCH="aarch64";; \
+  esac && \
   # install alpine packages
   apk --no-cache add \
     curl \
@@ -51,7 +56,7 @@ RUN \
   sed -i "s/user = nobody$/user = www-data/" /etc/php?/php-fpm.d/www.conf && \
   sed -i "s/group = nobody$/group = www-data/" /etc/php?/php-fpm.d/www.conf && \
   # download s6-overlay to /
-  curl -LS https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${ARCH}.tar.gz | \
+  curl -LS https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${S6ARCH}.tar.gz | \
     tar zx -C /
 
 # add files from our git repo
