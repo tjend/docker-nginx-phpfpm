@@ -1,2 +1,3 @@
-#!/usr/bin/execlineb -P
+#!/usr/bin/with-contenv sh
+# use with-contenv to pass env vars to phpfpm
 php-fpm8 --nodaemonize

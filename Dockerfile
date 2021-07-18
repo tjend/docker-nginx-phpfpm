@@ -58,7 +58,9 @@ RUN \
   sed -i 's#^error_log /var/log/nginx/error.log warn;$#error_log /var/run/s6/nginx-error-log-fifo warn;#' /etc/nginx/nginx.conf && \
   # use s6 for phpfpm error log
   sed -i 's#^;error_log = log/php8/error.log$#error_log = /var/run/s6/phpfpm-error-log-fifo#' /etc/php8/php-fpm.conf && \
-  # run php-fpm as the www-data user
+  # make env vars available to phpfpm
+  sed -i 's/^;clear_env = no$/clear_env = no/' /etc/php8/php-fpm.d/www.conf && \
+  # run phpfpm as the www-data user
   sed -i "s/user = nobody$/user = www-data/" /etc/php8/php-fpm.d/www.conf && \
   sed -i "s/group = nobody$/group = www-data/" /etc/php8/php-fpm.d/www.conf && \
   # download s6-overlay to /
