@@ -1,6 +1,9 @@
 #!/usr/bin/execlineb -P
 if { mkdir -p /var/log/s6 }
 if { chown nobody:nogroup /var/log/s6 }
+if { rm -f /var/run/s6/nginx-access-log-fifo }
+if { rm -f /var/run/s6/nginx-error-log-fifo }
+if { rm -f /var/run/s6/phpfpm-error-log-fifo }
 if { s6-mkfifo /var/run/s6/nginx-access-log-fifo }
 if { s6-mkfifo /var/run/s6/nginx-error-log-fifo }
 if { s6-mkfifo /var/run/s6/phpfpm-error-log-fifo }
