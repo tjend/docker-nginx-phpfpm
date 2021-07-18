@@ -1,0 +1,2 @@
+#!/bin/sh
+exec logutil-service -f /var/run/s6/phpfpm-error-log-fifo /var/log/s6/phpfpm-error-logs

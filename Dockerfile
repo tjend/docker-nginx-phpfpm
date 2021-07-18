@@ -52,9 +52,15 @@ RUN \
   adduser -u 82 -D -S -H -g 'www-data' -h /var/www -G www-data www-data && \
   # reduce nginx worker processes to 1
   sed -i 's/^worker_processes auto;$/worker_processes 1;/' /etc/nginx/nginx.conf && \
+  # use s6 for nginx access log
+  sed -i 's#^	access_log /var/log/nginx/access.log main;$#	access_log /var/run/s6/nginx-access-log-fifo main;#' /etc/nginx/nginx.conf && \
+  # use s6 for nginx error log
+  sed -i 's#^error_log /var/log/nginx/error.log warn;$#error_log /var/run/s6/nginx-error-log-fifo warn;#' /etc/nginx/nginx.conf && \
+  # use s6 for phpfpm error log
+  sed -i 's#^;error_log = log/php8/error.log$#error_log = /var/run/s6/phpfpm-error-log-fifo#' /etc/php8/php-fpm.conf && \
   # run php-fpm as the www-data user
-  sed -i "s/user = nobody$/user = www-data/" /etc/php?/php-fpm.d/www.conf && \
-  sed -i "s/group = nobody$/group = www-data/" /etc/php?/php-fpm.d/www.conf && \
+  sed -i "s/user = nobody$/user = www-data/" /etc/php8/php-fpm.d/www.conf && \
+  sed -i "s/group = nobody$/group = www-data/" /etc/php8/php-fpm.d/www.conf && \
   # download s6-overlay to /
   curl -LS https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${S6ARCH}.tar.gz | \
     tar zx -C /

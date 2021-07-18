@@ -1,0 +1,2 @@
+#!/bin/sh
+exec logutil-service -f /var/run/s6/nginx-access-log-fifo /var/log/s6/nginx-access-logs

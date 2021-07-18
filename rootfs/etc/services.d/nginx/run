@@ -1,2 +1,3 @@
 #!/usr/bin/execlineb -P
-nginx -g "daemon off;"
+# set default error log and run in foreground
+nginx -e "/var/run/s6/nginx-error-log-fifo" -g "daemon off;"
