@@ -17,8 +17,10 @@ RUN \
     nginx \
     php8-brotli \
     php8-cli \
+    php8-ctype \
     php8-curl \
     php8-dom \
+    php8-exif \
     php8-fileinfo \
     php8-fpm \
     php8-gd \
@@ -35,6 +37,7 @@ RUN \
     php8-pdo_pgsql \
     php8-pdo_sqlite \
     php8-pecl-apcu \
+    php8-pecl-imagick \
     php8-pecl-lzf \
     php8-pecl-oauth \
     php8-pecl-redis \
