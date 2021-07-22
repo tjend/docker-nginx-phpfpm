@@ -66,6 +66,11 @@ RUN \
   # run phpfpm as the www-data user
   sed -i "s/user = nobody$/user = www-data/" /etc/php8/php-fpm.d/www.conf && \
   sed -i "s/group = nobody$/group = www-data/" /etc/php8/php-fpm.d/www.conf && \
+  # set upload file size and max post size
+  echo "php_admin_value[upload_max_filesize] = 32M" >> /etc/php8/php-fpm.d/www.conf && \
+  echo "php_admin_value[post_max_size] = 64M" >> /etc/php8/php-fpm.d/www.conf && \
+  # set memory limit
+  sed -i "s/.*php_admin_value\[memory_limit\] = .*$/php_admin_value[memory_limit] = 128M/" /etc/php8/php-fpm.d/www.conf && \
   # download s6-overlay to /
   curl -LS https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${S6ARCH}.tar.gz | \
     tar zx -C /
