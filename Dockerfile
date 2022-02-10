@@ -75,7 +75,7 @@ RUN \
   echo "php_admin_value[max_execution_time] = 120" >> /etc/php8/php-fpm.d/www.conf && \
   echo "php_admin_value[max_input_time] = 300" >> /etc/php8/php-fpm.d/www.conf && \
   # download s6-overlay to /
-  curl -LS https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${S6ARCH}.tar.gz | \
+  curl -LS https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-${S6ARCH}.tar.gz | \
     tar zx -C /
 
 # add files from our git repo
