@@ -6,3 +6,4 @@ services:
       args:
         - TARGETARCH=amd64
       context: .
+    image: docker.io/tjend/alpine-nginx-phpfpm

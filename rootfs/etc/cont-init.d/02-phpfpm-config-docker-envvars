@@ -2,7 +2,7 @@
 # use with-contenv to access env vars
 
 # create custom docker env var config for phpfpm www pool
-echo "[www]" > /etc/php8/php-fpm.d/www-docker.conf
+echo "[www]" > /etc/php/php-fpm.d/www-docker.conf
 
 # set opcache validate timestamps - default = on
-echo "php_admin_value[opcache.validate_timestamps] = ${PHPFPM_OPCACHE_VALIDATE_TIMESTAMPS:-on}" >> /etc/php8/php-fpm.d/www-docker.conf
+echo "php_admin_value[opcache.validate_timestamps] = ${PHPFPM_OPCACHE_VALIDATE_TIMESTAMPS:-on}" >> /etc/php/php-fpm.d/www-docker.conf

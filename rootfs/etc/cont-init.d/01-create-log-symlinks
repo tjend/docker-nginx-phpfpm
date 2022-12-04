@@ -1,4 +1,4 @@
 #!/usr/bin/execlineb -P
 if { ln -f -s ../s6/nginx-access-logs/current /var/log/nginx/access.log }
 if { ln -f -s ../s6/nginx-error-logs/current /var/log/nginx/error.log }
-if { ln -f -s ../s6/phpfpm-error-logs/current /var/log/php8/error.log }
+if { ln -f -s ../s6/phpfpm-error-logs/current /var/log/php/error.log }
