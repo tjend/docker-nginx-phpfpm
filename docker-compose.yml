@@ -6,4 +6,8 @@ services:
       args:
         - TARGETARCH=amd64
       context: .
-    image: docker.io/tjend/alpine-nginx-phpfpm
+    image: localhost/alpine-nginx-phpfpm
+    ports:
+      - 8080:80
+    volumes:
+      - ./php:/var/www

@@ -1,6 +1,6 @@
 # based on https://github.com/just-containers/base-alpine/blob/master/Dockerfile
 
-FROM alpine:latest
+FROM docker.io/alpine:latest
 
 # TARGETARCH will be amd64 or arm64
 ARG TARGETARCH
