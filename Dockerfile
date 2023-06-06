@@ -48,6 +48,7 @@ RUN \
     php${PHP_VERSION}-pgsql \
     php${PHP_VERSION}-posix \
     php${PHP_VERSION}-session \
+    php${PHP_VERSION}-shmop \
     php${PHP_VERSION}-simplexml \
     php${PHP_VERSION}-sqlite3 \
     php${PHP_VERSION}-xml \
