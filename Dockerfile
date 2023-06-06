@@ -5,8 +5,8 @@ FROM docker.io/alpine:latest
 # TARGETARCH will be amd64 or arm64
 ARG TARGETARCH
 
-# target the latest php version in alpine - unfortunately some packages need this (most don't)
-ARG PHP_VERSION="81"
+# target the latest php version in alpine
+ARG PHP_VERSION="82"
 
 RUN \
   # dynamic S6ARCH based on https://github.com/BretFisher/multi-platform-docker-build
@@ -19,40 +19,40 @@ RUN \
     curl \
     nginx \
     php${PHP_VERSION}-brotli \
-    php-cli \
-    php-ctype \
-    php-curl \
-    php-dom \
-    php-exif \
-    php-fileinfo \
-    php-fpm \
-    php-gd \
-    php-iconv \
-    php-intl \
-    php-ldap \
-    php-mbstring \
-    php-mysqli \
-    php-mysqlnd \
-    php-opcache \
-    php-openssl \
-    php-pcntl \
-    php-pdo_mysql \
-    php-pdo_pgsql \
-    php-pdo_sqlite \
+    php${PHP_VERSION}-cli \
+    php${PHP_VERSION}-ctype \
+    php${PHP_VERSION}-curl \
+    php${PHP_VERSION}-dom \
+    php${PHP_VERSION}-exif \
+    php${PHP_VERSION}-fileinfo \
+    php${PHP_VERSION}-fpm \
+    php${PHP_VERSION}-gd \
+    php${PHP_VERSION}-iconv \
+    php${PHP_VERSION}-intl \
+    php${PHP_VERSION}-ldap \
+    php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-mysqli \
+    php${PHP_VERSION}-mysqlnd \
+    php${PHP_VERSION}-opcache \
+    php${PHP_VERSION}-openssl \
+    php${PHP_VERSION}-pcntl \
+    php${PHP_VERSION}-pdo_mysql \
+    php${PHP_VERSION}-pdo_pgsql \
+    php${PHP_VERSION}-pdo_sqlite \
     php${PHP_VERSION}-pecl-apcu \
     php${PHP_VERSION}-pecl-imagick \
     php${PHP_VERSION}-pecl-lzf \
     php${PHP_VERSION}-pecl-redis \
     php${PHP_VERSION}-pecl-uploadprogress \
     php${PHP_VERSION}-pecl-uuid \
-    php-pgsql \
-    php-posix \
-    php-session \
-    php-simplexml \
-    php-sqlite3 \
-    php-xml \
-    php-xmlwriter \
-    php-zip && \
+    php${PHP_VERSION}-pgsql \
+    php${PHP_VERSION}-posix \
+    php${PHP_VERSION}-session \
+    php${PHP_VERSION}-simplexml \
+    php${PHP_VERSION}-sqlite3 \
+    php${PHP_VERSION}-xml \
+    php${PHP_VERSION}-xmlwriter \
+    php${PHP_VERSION}-zip && \
   # add www-data user
   adduser -u 82 -D -S -H -g 'www-data' -h /var/www -G www-data www-data && \
   # reduce nginx worker processes to 1
@@ -64,6 +64,7 @@ RUN \
   # symlink php paths/executables without version
   ln -s /etc/php* /etc/php && \
   ln -s /var/log/php* /var/log/php && \
+  ln -s /usr/bin/php* /usr/bin/php && \
   ln -s /usr/sbin/php-fpm* /usr/sbin/php-fpm && \
   # use s6 for phpfpm error log
   sed -i 's#^;error_log = log/php.*/error.log$#error_log = /var/run/s6/phpfpm-error-log-fifo#' /etc/php/php-fpm.conf && \
