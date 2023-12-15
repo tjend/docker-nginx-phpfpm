@@ -66,7 +66,6 @@ RUN \
   # symlink php paths/executables without version
   ln -s /etc/php* /etc/php && \
   ln -s /var/log/php* /var/log/php && \
-  ln -s /usr/bin/php* /usr/bin/php && \
   ln -s /usr/sbin/php-fpm* /usr/sbin/php-fpm && \
   # use s6 for phpfpm error log
   sed -i 's#^;error_log = log/php.*/error.log$#error_log = /var/run/s6/phpfpm-error-log-fifo#' /etc/php/php-fpm.conf && \
